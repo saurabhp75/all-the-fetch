@@ -22,17 +22,23 @@ export function setData() {
     // Serialize/stringify the JS object
     let jsonstring = JSON.stringify(obj);
 
-    // let fd = new FormData(document.getElementById('myform'));
+    // Non-optimal way to add file data to the request body
+    // let fd = new FormData();
+    // console.log(imgInput.value);
     // console.log(imgInput.files[0]);
-    // fd.append('imageFile', imgInput.files[0], imgInput.files[0].name);
+    // fd.append("imageFile", imgInput.files[0], imgInput.files[0].name)
+    
+
+    // Optimal way to add file data to the request body
+    let fd = new FormData(document.getElementById('myform'));
 
     let request = new Request(endpoint, {
       method: 'POST',
-      body: jsonstring,
-      // body: fd,
+      // body: jsonstring,
+      body: fd,
       headers: {
-        // 'content-type': 'multipart/form-data',
-        'content-type': 'application/json'
+        'content-type': 'multipart/form-data',
+        // 'content-type': 'application/json'
       },
     });
 
